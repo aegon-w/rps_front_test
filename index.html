@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--************************************************************************************************************************************-->
+    <section class="header">
+        <div class="div_general">
+            <div class="player img">
+                <img src="./images/player1.png" alt="Player 1">
+                <p>Ahmed</p>
+            </div>
+        </div>
+    
+        <div class="score-container">
+            <div class="score-nav">
+                <span id="player1-score" class="score1_current-score">0</span> 
+                <span class="max-score">/</span> 
+                <span class="max-score">20</span>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar1"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="div_general prize">
+            <p id="prize_txt">Prize</p>
+            <p id="prize_nb">2000<span>💵</span></p>
+        </div>
+    
+        <div class="score-container">
+            <div class="score-nav">
+                <div id="score-place">
+                    <span id="player2-score" class="score2_current-score">0</span> 
+                    <span class="max-score">/</span> 
+                    <span class="max-score">20</span>
+                </div>
+                <div class="progress-container reverse">
+                    <div class="progress-bar" id="progress-bar2"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="div_general">
+            <div class="player img">
+                <img src="./images/player1.png" alt="Player 2">
+                <p>Ahmed</p>
+            </div>
+        </div>
+    </section>
+
+    <!--************************************************************************************************************************************-->
+
+    <section class="game-area">
+        <!-- Player 1 -->
+        <div class="game img">
+            <img id="player1-hand" src="./images/left_paper.png" alt="Player 1 Hand">
+            <div class="controls">
+                <button onclick="selectHand(1, 'rock')">Rock</button>
+                <button onclick="selectHand(1, 'paper')">Paper</button> 
+                <button onclick="selectHand(1, 'scissors')">Scissors</button>
+                <button id="ready-button" onclick="setReady(1)">READY</button>    
+            </div>
+        </div>
+    
+        <!-- Timer and Score Display -->
+        <div>
+            <div>
+                <p class="timer" id="timer">3 Sec</p>
+            </div>
+            <div id="winner-container">
+                <!-- default image -->
+                <div>
+                    <img id="winner-img" src="./images/player1.png" alt=""> <br>
+                </div>
+
+                <div>
+                    <p id="winner-msg"></p>
+                </div>
+            </div>            
+        </div>
+
+
+        <!-- Player 2 -->
+        <div class="game img">
+    
+            <img id="player2-hand" src="./images/right_paper.png" alt="Player 2 Hand">
+            <p class="controls">
+                <button onclick="selectHand(2, 'rock')">Rock</button>
+                <button onclick="selectHand(2, 'paper')">Paper</button> 
+                <button onclick="selectHand(2, 'scissors')">Scissors</button>
+                <button id="ready-button" onclick="setReady(2)">READY</button>    
+            </p>
+        </div>
+    </section>
+    
+
+<!--************************************************************************************************************************************-->
+
+    <footer class="footer">
+        <button class="exit-button">EXIT</button>
+        
+    </footer>
+
+<!--************************************************************************************************************************************-->
+
+    <script>
+        let player1Choice = null;
+        let player2Choice = null;
+        let player1Ready = false;
+        let player2Ready = false;
+        let player1Score = 0;
+        let player2Score = 0;
+
+        const timerElement = document.getElementById('timer');
+        const winnerMsg = document.getElementById('winner-msg');
+        const winnerContainer = document.getElementById('winner-container');
+        const player1ScoreElement = document.getElementById('player1-score');
+        const player2ScoreElement = document.getElementById('player2-score');
+        const player1Hand = document.getElementById('player1-hand');
+        const player2Hand = document.getElementById('player2-hand');
+
+        let player1SelectedButton = null;
+        let player2SelectedButton = null;
+
+        function selectHand(player, hand) {
+            if (player === 1) {
+                player1Choice = hand;
+                highlightButton(1, hand);  // Highlight Player 1's selected button
+            } else {
+                player2Choice = hand;
+                highlightButton(2, hand);  // Highlight Player 2's selected button
+            }
+            updateHandImage(player, hand);
+        }
+
+        // Function to highlight the selected button
+        function highlightButton(player, hand) {
+            const controls = document.querySelectorAll(
+                `.game:nth-child(${player === 1 ? 1 : 3}) .controls button`
+            );
+
+            // Reset previous selected button for this player
+            controls.forEach((button) => button.classList.remove('selected'));
+
+            // Find the button that matches the selected hand and add 'selected' class
+            controls.forEach((button) => {
+                if (button.textContent.toLowerCase() === hand) {
+                    button.classList.add('selected');
+                }
+            });
+        }
+        function updateHandImage(player, hand) {
+            const imgSrc = `./images/${player === 1 ? 'left' : 'right'}_${hand}.png`;
+            if (player === 1) {
+                player1Hand.src = imgSrc;
+            } else {
+                player2Hand.src = imgSrc;
+            }
+        }
+
+        function setReady(player) {
+            if (player === 1) {
+                player1Ready = true;
+            } else {
+                player2Ready = true;
+            }
+
+            if (player1Ready && player2Ready) {
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            let timeLeft = 3;
+            winnerMsg.textContent = 'Get ready!';
+
+            const countdown = setInterval(() => {
+                timerElement.textContent = `${timeLeft} Sec`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdown);
+                    determineWinner();
+                }
+            }, 1000);
+        }
+
+        function determineWinner() {
+            const winnerImg = document.getElementById('winner-img'); // Image element to show the winner
+
+            // default image
+            // winnerImg.src = './images/player1.png';
+            // if player didn't choose any hand
+            if (player1Choice === null || player2Choice === null || player1Choice === null && player2Choice === null ) {
+                winnerMsg.textContent = 'choose a hand';
+                // style the message
+                winnerMsg.style.color = 'red';
+                winnerMsg.style.fontSize = '20px';
+                winnerMsg.style.fontWeight = 'bold';
+                winnerMsg.style.textAlign = 'left';
+                winnerMsg.style.fontFamily = 'Arial, sans-serif';
+            }
+            else if (player1Choice === player2Choice) {
+                winnerMsg.textContent = "It's a tie!";
+            }
+            else if (
+                (player1Choice === 'rock' && player2Choice === 'scissors') ||
+                (player1Choice === 'paper' && player2Choice === 'rock') ||
+                (player1Choice === 'scissors' && player2Choice === 'paper')
+            ) {
+                winnerImg.src = './images/player1.png'; // Player 1 wins
+                winnerMsg.textContent = 'player 1 wins';
+                player1Score++;
+            } 
+            else {
+                winnerImg.src = './images/player2.png'; // Player 2 wins
+                winnerMsg.textContent = 'player 2 wins';
+                player2Score++;
+            }
+            // Display the updated scores and progress bars
+            updateScores(player1Score, player2Score);
+
+            // Show the winner image
+            // winnerImg.style.display = 'block';
+
+            // Reset for the next round
+            player1Choice = player2Choice = null;
+            player1Ready = player2Ready = false;
+            timerElement.textContent = '3 Sec';
+        }
+
+
+        function updateScores(player1Score, player2Score) {
+            const player1Element = document.getElementById('player1-score');
+            const player2Element = document.getElementById('player2-score');
+            const progressBar1 = document.getElementById('progress-bar1');
+            const progressBar2 = document.getElementById('progress-bar2');
+
+            // Update score elements
+            player1Element.textContent = player1Score;
+            player2Element.textContent = player2Score;
+
+            // Calculate progress percentages (assuming max score is 20)
+            const player1Progress = (player1Score / 20) * 100;
+            const player2Progress = (player2Score / 20) * 100;
+
+            // Update progress bar widths
+            progressBar1.style.width = `${player1Progress}%`;
+            progressBar2.style.width = `${player2Progress}%`;
+
+            // Apply colors dynamically based on scores
+            if (player1Score > player2Score) {
+                player1Element.style.color = '#05f2b2'; // Green
+                player2Element.style.color = '#ff4e4e'; // Red
+                progressBar1.style.backgroundColor = '#05f2b2';
+                progressBar2.style.backgroundColor = '#ff4e4e';
+            } else if (player1Score < player2Score) {
+                player1Element.style.color = '#ff4e4e'; // Red
+                player2Element.style.color = '#05f2b2'; // Green
+                progressBar1.style.backgroundColor = '#ff4e4e';
+                progressBar2.style.backgroundColor = '#05f2b2';
+            } else {
+                // In case of a tie, both are gray
+                player1Element.style.color = player2Element.style.color = '#808080';
+                progressBar1.style.backgroundColor = progressBar2.style.backgroundColor = '#808080';
+            }
+        }
+    </script>
+</body>
+</html>

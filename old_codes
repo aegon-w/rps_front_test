@@ -1,0 +1,50 @@
+    <!-- <section class="header">
+        <div class="div_general">
+            <div class="player img">
+              <img src="./images/player1.png" alt="Player 1">
+              <p>Ahmed     </p>
+            </div>
+        </div>
+          
+        <div class="score-container">
+            <div class="score">
+                <span class="score1_current-score">05</span> <span class="max-score">/</span> 
+                <span class="max-score">20</span>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+            </div>
+            
+        </div>
+
+              
+        <div class="div_general prize">
+            <p id="prize_txt">Prize</p>
+            <p id="prize_nb"> 2000<span>💵</span></p>
+        </div>
+                
+        <div class="score-container">
+            <div class="score">
+                <div id="score-place">
+                    <span class="score2_current-score" >19</span> <span class="max-score">/</span> 
+                    <span class="max-score">20</span>
+                    
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div_general">
+            <div class="player img">
+                <img src="./images/player1.png" alt="Player 2">
+                <p>Ahmed     </p>
+            </div>
+        </div>
+    </section> -->
+
+
+
+
+    

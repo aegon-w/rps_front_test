@@ -1,0 +1,273 @@
+* {
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Arial', sans-serif; */
+  }
+  
+  body {
+    background-color: #0b0f1a;
+    color: white;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+  }
+    
+
+  .footer{
+    background-color: #0b0f1a;
+    text-align: end;
+    height: 5%;
+    margin-right: 5%;
+    margin-bottom: 2%;
+  }
+
+  /* HTML: <div class="loader"></div> */
+.loader {
+  width: 120px;
+  height: 22px;
+  border-radius: 40px;
+  color: #514b82;
+  border: 2px solid;
+  position: relative;
+  overflow: hidden;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  margin: 2px;
+  width: 14px;
+  top: 0;
+  bottom: 0;
+  left: -20px;
+  border-radius: inherit;
+  background: currentColor;
+  box-shadow: -10px 0 12px 3px currentColor;
+  clip-path: polygon(0 5%, 100% 0,100% 100%,0 95%,-30px 50%);
+  animation: l14 1s infinite linear;
+}
+@keyframes l14 {
+  100% {left: calc(100% + 20px)}
+}
+
+
+
+
+/* --------------------------------------------Header-------------------------------------------- */
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #131F35;
+  border-radius: 15px;
+  width: auto;
+  height: auto;
+  margin: 2%;
+}
+
+.div_general{
+  text-align: center;
+  width: 30%;
+}
+
+.player img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+/* Container to align the scores horizontally */
+.score-container {
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  width: 100%;
+  margin-top: auto;
+  text-align: right;
+} 
+
+/* Individual Score Styling */
+.score-nav {
+  font-family: 'Syncopate';
+  font-size: 50px;
+  font-weight: bold;
+}
+
+/* Styling for the first score's progress indicator */
+.score1_current-score {
+  color: #05f2b2; /* Green */
+}
+
+.score2_current-score {
+  color: #ff4e4e; /* Red */
+}
+
+#score-place{
+  width: 150%;
+}
+
+/* Optional: Styling the slash and max score */
+.max-score {
+  font-size: 30px;
+  color: #808080;
+  font-weight: normal;
+}
+
+
+.prize  {
+  text-align: center;
+  background-color: #273349;
+  padding: 10px 5px;
+  border-radius: 10px ;
+}
+
+#prize_txt{
+  color :#8E8E8E;
+  font-family: 'Poppins';
+}
+
+#prize_nb{
+  width: 100%;
+  height: 100%;
+  top: 241px;
+  left: 1322px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.progress-container {
+  width: 150%;
+  height: 20px;
+  background-color: #2c2f3f;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex; /* Use flexbox */
+}
+
+/* Progress bar for Player 1 (left to right) */
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #4a6ba9;
+  transition: width 0.4s ease-in-out;
+}
+
+.progress-container.reverse {
+  flex-direction: row-reverse; /* Make the bar fill from right to left */
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------- */
+
+
+.game-area { 
+    display: flex; /* Enable Flexbox */
+    justify-content: space-around; /*Space between sections*/
+    align-items: center; /*Center vertically*/
+    padding: 10px;
+    background-color: #0b0f1a;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.game img {
+  width: 500px;
+  height: 500px;
+  margin : auto;
+  background-color: #131F35;
+}
+
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #1e2b1d;
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 2%;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #273808;
+}
+
+#ready-button {
+  background-color: limegreen;
+  color: black;
+}
+
+.exit-button {
+  background-color: red;
+  color: white;
+  padding: 10px 50px;
+  align-items:flex-end;
+  
+}
+
+.timer{
+  font-size: 50px;
+  color: #f5f5f5;
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+  padding-bottom: 40%;
+}
+.score {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #f5f5f5;
+  padding-bottom: 50%;
+}
+
+#winner-container {
+  margin-top: 20px;
+  /* text-align: center; */
+  font-size: 25px;
+  padding-bottom: 200px ;
+  font-style: 'poppins';
+}
+
+#winner-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #05f2b2;
+  object-fit: cover;
+  display: block;
+  text-align: center;
+}
+
+.controls button {
+  background-color: #1a1a1a;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+/* Highlight when selected */
+.controls button.selected {
+  border-color: #32cd32; /* Bright green border */
+  background-color: #1f401f; /* Darker green background */
+  color: #e9ffe9; /* Light green text */
+}
